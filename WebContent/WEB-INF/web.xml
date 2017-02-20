@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>vbusiness</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+	<!-- 配置登录页面路径 -->
+	<context-param>
+		<param-name>login_page</param-name>
+		<param-value>/index.jsp</param-value>
+	</context-param>
+
+	<!-- 需要配置登录才能操作的页面路径 -->
+	<context-param>
+		<param-name>validate_page</param-name>
+		<param-value>/main.jsp,/info.do,/save.do,/sys.jsp,/add.jsp,/user.jsp,/out.jsp,/add.do,/check.do,/user.do,/main.do</param-value>
+	</context-param>
+
+	<!-- 无需配置登录就能访问的页面 -->
+	<!--pay attention to!!!/login.do无需配置登录才可访问  -->
+	<context-param>
+		<param-name>common_page</param-name>
+		<param-value>/index.jsp,/login.do,/getpass.jsp,/updatepass.jsp</param-value>
+	</context-param>
+  <!-- 配置servlet -->
+ <servlet>
+ <servlet-name>LoginServlet</servlet-name>
+ <servlet-class>com.vbusiness.servlet.LoginServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>LoginServlet</servlet-name>
+  <url-pattern>/login.do</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet>
+ <servlet-name>InfoServlet</servlet-name>
+ <servlet-class> com.vbusiness.servlet.InfoServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>InfoServlet</servlet-name>
+  <url-pattern>/info.do</url-pattern>
+ </servlet-mapping>
+ 
+   <servlet>
+ <servlet-name>SaveInfoServlet</servlet-name>
+ <servlet-class> com.vbusiness.servlet.SaveInfoServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>SaveInfoServlet</servlet-name>
+  <url-pattern>/save.do</url-pattern>
+ </servlet-mapping>
+ 
+    <servlet>
+ <servlet-name>AddUserServlet</servlet-name>
+ <servlet-class> com.vbusiness.servlet.AddUserServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>AddUserServlet</servlet-name>
+  <url-pattern>/add.do</url-pattern>
+ </servlet-mapping>
+
+     <servlet>
+ <servlet-name>MainServlet</servlet-name>
+ <servlet-class>  com.vbusiness.servlet.MainServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>MainServlet</servlet-name>
+  <url-pattern>/main.do</url-pattern>
+ </servlet-mapping>
+ 	<servlet>
+		<servlet-name>CheckUserIdServlet</servlet-name>
+		<servlet-class>com.vbusiness.servlet.CheckUserIdServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckUserIdServlet</servlet-name>
+		<url-pattern>/check.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>GetUserInfoServlet</servlet-name>
+		<servlet-class>com.vbusiness.servlet.GetUserInfoServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GetUserInfoServlet</servlet-name>
+		<url-pattern>/user.do</url-pattern>
+	</servlet-mapping>
+	
+ 
+ 
+ 	<!-- 配置编码方式Filter -->
+	<filter>
+		<filter-name>charsetEncoding</filter-name>
+		<filter-class>com.vbusiness.filter.CharsetEncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>charsetEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 验证用户是否登录的Filter -->
+	<filter>
+		<filter-name>validateLogn</filter-name>
+		<filter-class>com.vbusiness.filter.ValidateFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>validateLogn</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>validateLogn</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+ 
+</web-app>
